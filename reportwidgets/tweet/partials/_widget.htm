@@ -1,0 +1,218 @@
+<div class="report-widget">
+    <h3><?= e($this->property('title')) ?></h3>
+
+    <style type="text/css">
+    .message-item {
+        margin-bottom: 25px;
+        margin-left: 40px;
+        position: relative;
+    }
+    .message-item .message-inner {
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        padding: 10px;
+        position: relative;
+    }
+    .message-item .message-inner:before {
+        border-right: 10px solid #ddd;
+        border-style: solid;
+        border-width: 10px;
+        color: rgba(0,0,0,0);
+        content: "";
+        display: block;
+        height: 0;
+        position: absolute;
+        left: -20px;
+        top: 6px;
+        width: 0;
+    }
+    .message-item .message-inner:after {
+        border-right: 10px solid #fff;
+        border-style: solid;
+        border-width: 10px;
+        color: rgba(0,0,0,0);
+        content: "";
+        display: block;
+        height: 0;
+        position: absolute;
+        left: -18px;
+        top: 6px;
+        width: 0;
+    }
+    .message-item:before {
+        background: #fff;
+        border-radius: 2px;
+        bottom: -30px;
+        box-shadow: 0 0 3px rgba(0,0,0,0.2);
+        content: "";
+        height: 100%;
+        left: -30px;
+        position: absolute;
+        width: 3px;
+    }
+    .message-item:after {
+        background: #fff;
+        border: 2px solid #ccc;
+        border-radius: 50%;
+        box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        content: "";
+        height: 15px;
+        left: -36px;
+        position: absolute;
+        top: 10px;
+        width: 15px;
+    }
+    .clearfix:before, .clearfix:after {
+        content: " ";
+        display: table;
+    }
+    .message-item .message-head {
+        border-bottom: 1px solid #eee;
+        margin-bottom: 8px;
+        padding-bottom: 8px;
+    }
+    .message-item .message-head .avatar {
+        margin-right: 20px;
+    }
+    .message-item .message-head .user-detail {
+        overflow: hidden;
+    }
+    .message-item .message-head .user-detail h5 {
+        font-size: 16px;
+        font-weight: bold;
+        margin: 0;
+    }
+    .message-item .message-head .post-meta {
+        float: left;
+        padding: 0 15px 0 0;
+    }
+    .message-item .message-head .post-meta >div {
+        color: #333;
+        font-weight: bold;
+        text-align: right;
+    }
+    .post-meta > div {
+        color: #777;
+        font-size: 12px;
+        line-height: 22px;
+    }
+    .message-item .message-head .post-meta >div {
+        color: #333;
+        font-weight: bold;
+        text-align: right;
+    }
+    .post-meta > div {
+        color: #777;
+        font-size: 12px;
+        line-height: 22px;
+    }
+    img {
+         min-height: 40px;
+         max-height: 40px;
+    }
+    </style>
+
+    <div class="qa-message-list" id="wallmessages">
+        <div class="message-item" id="inputpost">
+            <div class="message-inner">
+                <div class="message-head clearfix">
+                    <div class="avatar pull-left"><img src="<?= $user['profile_image_url'] ?>"></div>
+                    <div class="user-detail">
+                        <h5 class="handle"><?= $user['name'] ?></h5>
+                        <div class="post-meta">
+                            <div class="asker-meta">
+                                <span class="qa-message-what"></span>
+                                <span class="qa-message-when">
+                                    <span class="qa-message-when-data">Now</span>
+                                </span>
+                                <span class="qa-message-who">
+                                    <span class="qa-message-who-pad">by </span>
+                                    <span class="qa-message-who-data"><a target="_blank" href="https://twitter.com/<?= $user['screen_name'] ?>"><?= $user['screen_name'] ?></a></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="qa-message-content">
+                    <form accept-charset="UTF-8" action="" class="layout-item stretch layout-column" id="twitterupdate" method="POST">
+                        <textarea class="form-control" id="new_message" name="new_message" placeholder="Type in your message" rows="5" maxlength="140"></textarea>
+                        <h6 class="pull-right"><span class="counter">140</span> characters remaining</h6>
+                        <div class="form-buttons layout-item fix" style="margin-top: 10px;">
+                            <div class="loading-indicator-container">
+                            <button type="submit" class="btn btn-primary" id="submit">
+                                Post new Message
+                            </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+                    
+
+        <?php foreach($posts as $post): ?>          
+            <div class="message-item" id="post">
+                <div class="message-inner">
+                    <div class="message-head clearfix">
+                        <div class="avatar pull-left"><img src="<?= $post['user']['profile_image_url'] ?>"></div>
+                        <div class="user-detail">
+                            <h5 class="handle"><?= $post['user']['name'] ?></h5>
+                            <div class="post-meta">
+                                <div class="asker-meta">
+                                    <span class="qa-message-what"></span>
+                                    <span class="qa-message-when">
+                                        <span class="qa-message-when-data"><?= $post['date_processed'] ?></span>
+                                    </span>
+                                    <span class="qa-message-who">
+                                        <span class="qa-message-who-pad">by </span>
+                                        <span class="qa-message-who-data"><a target="_blank" href="https://twitter.com/<?= $post['user']['screen_name'] ?>"><?= $post['user']['screen_name'] ?></a></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="qa-message-content">
+                        <?= $post['text_processed'] ?>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+                                       
+    </div>
+</div>
+<script type="text/javascript">
+    $("form").submit(function( event ) {
+        event.preventDefault();
+        if ($("textarea#new_message").val().length < 3) {
+            $.oc.flashMsg({text: 'The message needs to be at least 3 characters.', 'class': 'warning', 'interval': 3});
+            return;
+        };
+        $('#submit').loadIndicator({text: 'Posting...', opaque: true})
+        var posting = $.post( window.location.pathname, { new_message: $("textarea#new_message").val() });
+        posting.done(function( data ) {
+            $('#submit').loadIndicator('hide');
+            $.oc.flashMsg({text: 'The status update has been successfully posted.', 'class': 'success', 'interval': 3});
+
+            var $input = $("#inputpost").clone();
+
+            var $post = $("#inputpost");
+            $post.find(".qa-message-content").text($("textarea#new_message").val());
+            $post.attr("id", "message");
+            $post.find("qa-message-when-data").text("2 seconds ago")
+
+            $input.find("textarea#new_message").val("");
+            $input.prependTo("#wallmessages")
+        });
+    });
+    $("textarea#new_message").each(function() {
+        var $this = $(this);
+        var maxLength = parseInt($this.attr('maxlength'));
+        var el = $(".counter");
+        
+        $this.bind('keyup', function() {
+            var cc = $this.val().length;                      
+            el.text(maxLength - cc);
+        });
+    });
+</script>
