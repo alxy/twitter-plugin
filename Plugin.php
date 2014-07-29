@@ -30,7 +30,6 @@ class Plugin extends PluginBase
         ];
     }
 
-<<<<<<< HEAD
     public function registerReportWidgets()
     {
         return [
@@ -42,8 +41,6 @@ class Plugin extends PluginBase
         ];
     }
 
-=======
->>>>>>> 01db186477cb66be8519122a6edcbe0c8274faff
     public function registerSettings()
     {
         return [
@@ -52,11 +49,7 @@ class Plugin extends PluginBase
                 'icon'        => 'icon-twitter',
                 'description' => 'Configure Twitter authentication parameters.',
                 'class'       => 'RainLab\Twitter\Models\Settings',
-<<<<<<< HEAD
-                'order'       => 210
-=======
                 'order'       => 600
->>>>>>> 01db186477cb66be8519122a6edcbe0c8274faff
             ]
         ];
     }
