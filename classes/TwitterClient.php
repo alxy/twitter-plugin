@@ -4,7 +4,10 @@ use Cache;
 use tmhOAuth;
 use RainLab\Twitter\Models\Settings;
 use System\Classes\ApplicationException;
+<<<<<<< HEAD
 use Carbon\Carbon;
+=======
+>>>>>>> 01db186477cb66be8519122a6edcbe0c8274faff
 
 class TwitterClient
 {
@@ -42,7 +45,11 @@ class TwitterClient
             return $unserialized;
 
         $code = $this->client->user_request([
+<<<<<<< HEAD
             'url' => $this->client->url('1.1/account/verify_credentials.json')
+=======
+            'url' => $this->client->url('1.1/account/verify_credentials')
+>>>>>>> 01db186477cb66be8519122a6edcbe0c8274faff
         ]);
 
         if ($code <> 200) {
@@ -55,6 +62,10 @@ class TwitterClient
         $result = json_decode($this->client->response['response'], true);
 
         Cache::put($cacheKey, serialize($result), 2);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 01db186477cb66be8519122a6edcbe0c8274faff
         return $result;
     }
 
@@ -97,6 +108,7 @@ class TwitterClient
         return $result;
     }
 
+<<<<<<< HEAD
     /**
      * Returns a collection of the most recent Tweets and retweets posted by the authenticating user and the users they follow.
      * @see https://dev.twitter.com/docs/api/1.1/get/statuses/home_timeline
@@ -158,13 +170,18 @@ class TwitterClient
         return $obj->client->response['response'];
     }
 
+=======
+>>>>>>> 01db186477cb66be8519122a6edcbe0c8274faff
     public function urlsToLinks($str)
     {
         return preg_replace('@(https?://([-\w\.]+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)@', '<a href="$1" target="_blank">$1</a>', $str);
     }
+<<<<<<< HEAD
 
     public function diffForHumans($date) {
         $carbon = new Carbon($date);
         return $carbon->diffForHumans();
     }
+=======
+>>>>>>> 01db186477cb66be8519122a6edcbe0c8274faff
 }
